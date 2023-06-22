@@ -1,0 +1,19 @@
+{
+  "payload": [
+    {
+      "LicenceUserName": "John",
+      "LicenceKey": "6a77b7eb5f0fcb957a4422e9d10c41a9",
+      "ValidationTime": 3600
+    },
+    {
+      "LicenceUserName": "Jane",
+      "LicenceKey": "2b95993380f8be6bd4bd46bf44f98db9",
+      "ValidationTime": 10
+    },
+    {
+      "LicenceUserName": "Alice",
+      "LicenceKey": "64489c85dc2fe0787b85cd87214b3810",
+      "ValidationTime": 7200
+    }
+  ]
+}
