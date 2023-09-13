@@ -84,12 +84,14 @@ def handle_client_request(client_socket):
 
     license_valid, response_data = check_license(license_user_name, license_key)
 
-    if license_valid and license_user_name not in active_licenses:
+    if license_valid:
         current_time = datetime.datetime.now()
-        expiration_time = current_time + datetime.timedelta(seconds=response_data)
-        expiration_time = expiration_time.isoformat()
-        active_licenses[license_user_name] = expiration_time
-        #expiration_time = active_licenses[license_user_name]
+        if license_user_name not in active_licenses:
+            expiration_time = current_time + datetime.timedelta(seconds=response_data)
+            expiration_time = expiration_time.isoformat()
+            active_licenses[license_user_name] = expiration_time
+        else:
+            expiration_time = active_licenses[license_user_name]
         response = {
             "LicenceUserName": license_user_name,
             "Licence": True,
@@ -104,8 +106,7 @@ def handle_client_request(client_socket):
 
     client_socket.sendall(json.dumps(response).encode())
     client_socket.close()
-    if response["Licence"] == False:
-        return
+
     if license_valid:
         with active_licenses_lock:
             active_licenses[license_user_name] = expiration_time

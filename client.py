@@ -57,7 +57,7 @@ def print_response(response):
     if response["Licence"] == True:
         print("Active\n" + response["Expired"])
     else:
-        print("Licence in use")
+        print(response["Description"])
 
 if __name__ == "__main__":
     args = sys.argv[1:]
@@ -68,8 +68,6 @@ if __name__ == "__main__":
     while(True):
         response = api.get_license_token()
         print_response(response)
-        if response['Licence'] == False:
-            break
         secs = (datetime.datetime.fromisoformat(response['Expired']) - datetime.datetime.now()).total_seconds()
         print(secs)
         time.sleep(secs+1)
